@@ -13,11 +13,11 @@ class sand:
     def move_down(self):
         self.rect.y = self.rect.y + 10
         
-    def move_left(self):
+    def move_down_left(self):
         self.rect.x -= 10
         self.rect.y += 10
         
-    def move_right(self):
+    def move_down_right(self):
         self.rect.x += 10
         self.rect.y += 10
         
@@ -46,7 +46,7 @@ class sand:
         else:
             return down_me
     
-    def check_sides(self, sands):
+    def check_down_sides(self, sands):
         left_me = False
         right_me = False
         
@@ -76,14 +76,14 @@ class sand:
             return 'l'
                 
     def gravity(self, sands):
-        check_sides = self.check_sides(sands)
+        check_down_sides = self.check_down_sides(sands)
         check_down = self.check_down(sands)
         if check_down == False:
             self.move_down()
-        elif check_sides == 'l':
-            self.move_left()
-        elif check_sides == 'r':
-            self.move_right()            
+        elif check_down_sides == 'l':
+            self.move_down_left()
+        elif check_down_sides == 'r':
+            self.move_down_right()            
 
 class rock:
     
