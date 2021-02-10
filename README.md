@@ -1,2 +1,13 @@
 # Sandbox py
  Sandbox game created with python, mainly inspired by 'The Sandbox' by Pixowl and 'Powder Game' by DAN-BALL.
+
+![image](https://cdn.discordapp.com/attachments/795094889351217172/808968032998260766/unknown.png)
+
+For now it includes 3 blocks, sand, water and rocks, it is quite heavy when you got a lot of blocks(500 or more), but I will work on an way to otimize it.
+
+# How to run
+To run the game you will need the last version of pygame, after you installed pygame run main.py and the game will appear!
+I will compile it after so people can download and play it easier.
+
+# Controls
+Click any mouse button to add blocks, to change between sand, water and rock press Q(Sand), W(Water) or E(Rock).
