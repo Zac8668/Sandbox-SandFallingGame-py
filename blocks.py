@@ -21,44 +21,44 @@ class sand:
         self.rect.x += 10
         self.rect.y += 10
         
-    def check_down(self, sands, op = 0):
+    def check_down(self, game_objs, op = 0):
         down_me = False
-        sand_x = None
-        sand_y = None
-        if len(sands) == 1:
-            if sands[0].rect.bottom == self.v_border:
+        obj_x = None
+        obj_y = None
+        if len(game_objs) == 1:
+            if game_objs[0].rect.bottom == self.v_border:
                 down_me = True
-        elif len(sands) >= 2:
-            for sand in sands:
+        elif len(game_objs) >= 2:
+            for obj in game_objs:
             #move down
-                if sand != self:
-                    if self.rect.bottom == sand.rect.top and self.rect.x == sand.rect.x:
+                if obj != self:
+                    if self.rect.bottom == obj.rect.top and self.rect.x == obj.rect.x:
                         down_me = True
-                        sand_x = sand.rect.x
-                        sand_y = sand.rect.y
+                        obj_x = obj.rect.x
+                        obj_y = obj.rect.y
                     elif self.rect.bottom == self.v_border:
                         down_me = True
-                        sand_x = None
-                        sand_y = None
+                        obj_x = None
+                        obj_y = None
                     
         if op == 1:
-            return [down_me, sand_x, sand_y]
+            return [down_me, obj_x, obj_y]
         else:
             return down_me
     
-    def check_down_sides(self, sands):
+    def check_down_sides(self, game_objs):
         left_me = False
         right_me = False
         
-        check_down = self.check_down(sands, 1)
+        check_down = self.check_down(game_objs, 1)
         
         if check_down[0] == True and check_down[1] != None and check_down[2] != None:
-            for sand in sands:
-                if  sand.rect.x == check_down[1] - 10 and sand.rect.y == check_down[2]:
+            for obj in game_objs:
+                if  obj.rect.x == check_down[1] - 10 and obj.rect.y == check_down[2]:
                     left_me = True
                 elif check_down[1] == 0:
                     left_me = True
-                if check_down[1] + 10 == sand.rect.x and sand.rect.y == check_down[2]:
+                if check_down[1] + 10 == obj.rect.x and obj.rect.y == check_down[2]:
                     right_me = True
                 elif check_down[1] == self.h_border - 10:
                     right_me = True
@@ -75,9 +75,9 @@ class sand:
         elif left_me == False and right_me == True:
             return 'l'
                 
-    def gravity(self, sands):
-        check_down_sides = self.check_down_sides(sands)
-        check_down = self.check_down(sands)
+    def gravity(self, game_objs):
+        check_down_sides = self.check_down_sides(game_objs)
+        check_down = self.check_down(game_objs)
         if check_down == False:
             self.move_down()
         elif check_down_sides == 'l':
@@ -97,33 +97,33 @@ class rock:
     def move_down(self):
         self.rect.y = self.rect.y + 10
         
-    def check_down(self, sands, op = 0):
+    def check_down(self, game_objs, op = 0):
         down_me = False
-        sand_x = None
-        sand_y = None
-        if len(sands) == 1:
-            if sands[0].rect.bottom == self.v_border:
+        obj_x = None
+        obj_y = None
+        if len(game_objs) == 1:
+            if game_objs[0].rect.bottom == self.v_border:
                 down_me = True
-        elif len(sands) >= 2:
-            for sand in sands:
+        elif len(game_objs) >= 2:
+            for obj in game_objs:
             #move down
-                if sand != self:
-                    if self.rect.bottom == sand.rect.top and self.rect.x == sand.rect.x:
+                if obj != self:
+                    if self.rect.bottom == obj.rect.top and self.rect.x == obj.rect.x:
                         down_me = True
-                        sand_x = sand.rect.x
-                        sand_y = sand.rect.y
+                        obj_x = obj.rect.x
+                        obj_y = obj.rect.y
                     elif self.rect.bottom == self.v_border:
                         down_me = True
-                        sand_x = None
-                        sand_y = None
+                        obj_x = None
+                        obj_y = None
                     
         if op == 1:
-            return [down_me, sand_x, sand_y]
+            return [down_me, obj_x, obj_y]
         else:
             return down_me
     
-    def gravity(self, sands):
-        check_down = self.check_down(sands)
+    def gravity(self, game_objs):
+        check_down = self.check_down(game_objs)
         if check_down == False:
             self.move_down()           
 
@@ -153,44 +153,44 @@ class water:
     def move_rright(self):
         self.rect.x += 10
         
-    def check_down(self, sands, op = 0):
+    def check_down(self, game_objs, op = 0):
         down_me = False
-        sand_x = None
-        sand_y = None
-        if len(sands) == 1:
-            if sands[0].rect.bottom == self.v_border:
+        obj_x = None
+        obj_y = None
+        if len(game_objs) == 1:
+            if game_objs[0].rect.bottom == self.v_border:
                 down_me = True
-        elif len(sands) >= 2:
-            for sand in sands:
+        elif len(game_objs) >= 2:
+            for obj in game_objs:
             #move down
-                if sand != self:
-                    if self.rect.bottom == sand.rect.top and self.rect.x == sand.rect.x:
+                if obj != self:
+                    if self.rect.bottom == obj.rect.top and self.rect.x == obj.rect.x:
                         down_me = True
-                        sand_x = sand.rect.x
-                        sand_y = sand.rect.y
+                        obj_x = obj.rect.x
+                        obj_y = obj.rect.y
                     elif self.rect.bottom == self.v_border:
                         down_me = True
-                        sand_x = None
-                        sand_y = None
+                        obj_x = None
+                        obj_y = None
                     
         if op == 1:
-            return [down_me, sand_x, sand_y]
+            return [down_me, obj_x, obj_y]
         else:
             return down_me
     
-    def check_sides(self, sands):
+    def check_sides(self, game_objs):
         left_me = False
         right_me = False
         
-        check_down = self.check_down(sands, 1)
+        check_down = self.check_down(game_objs, 1)
         
         if check_down[1] != None and check_down[2] != None:
-            for sand in sands:
-                if  sand.rect.x == check_down[1] - 10 and sand.rect.y == check_down[2]:
+            for obj in game_objs:
+                if  obj.rect.x == check_down[1] - 10 and obj.rect.y == check_down[2]:
                     left_me = True
                 elif check_down[1] == 0:
                     left_me = True
-                if check_down[1] + 10 == sand.rect.x and sand.rect.y == check_down[2]:
+                if check_down[1] + 10 == obj.rect.x and obj.rect.y == check_down[2]:
                     right_me = True
                 elif check_down[1] == self.h_border - 10:
                     right_me = True
@@ -206,14 +206,14 @@ class water:
         elif left_me == False and right_me == True:
             return 'l'
                 
-    def check_rsides(self, sands):
+    def check_rsides(self, game_objs):
         left_me = False
         right_me = False
         
-        for sand in sands:
-            if sand.rect.x == self.rect.x - 10 and sand.rect.y == self.rect.y:
+        for obj in game_objs:
+            if obj.rect.x == self.rect.x - 10 and obj.rect.y == self.rect.y:
                 left_me = True
-            if sand.rect.x == self.rect.x + 10 and sand.rect.y == self.rect.y:
+            if obj.rect.x == self.rect.x + 10 and obj.rect.y == self.rect.y:
                 right_me = True
                 
         if left_me == False and self.rect.x == 0:
@@ -238,10 +238,10 @@ class water:
                 obj.rect.y += 10
                 self.rect.y -= 10
                 
-    def gravity(self, sands):
-        check_sides = self.check_sides(sands)
-        check_down = self.check_down(sands)
-        check_rsides = self.check_rsides(sands)
+    def gravity(self, game_objs):
+        check_sides = self.check_sides(game_objs)
+        check_down = self.check_down(game_objs)
+        check_rsides = self.check_rsides(game_objs)
         if check_down == False:
             self.move_down()
         elif check_sides == 'l':
@@ -253,4 +253,4 @@ class water:
         elif check_rsides == 'r':
             self.move_rright()
         elif self.name == 'water':
-            self.check_up(sands)
+            self.check_up(game_objs)
