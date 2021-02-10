@@ -16,6 +16,7 @@ class sandbox_py:
         self.cur_block_img = pygame.Rect(screen_res[0] - 30, 10, 20, 20)
         
         pygame.init()
+        pygame.display.set_caption('sandbox.py')
         self.font = pygame.font.SysFont('Calibri', 40)
         self.all_game_objs = []
         
