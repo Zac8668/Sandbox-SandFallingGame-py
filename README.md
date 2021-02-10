@@ -10,4 +10,4 @@ To run the game you will need the last version of pygame, after you installed py
 I will compile it after so people can download and play it easier.
 
 # Controls
-Click any mouse to add blocks, to change between sand, water and rock press Q(Sand), W(Water) or E(Rock).
+Click any mouse button to add blocks, to change between sand, water and rock press Q(Sand), W(Water) or E(Rock).
