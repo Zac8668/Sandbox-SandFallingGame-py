@@ -3,7 +3,7 @@
 
 ![image](https://cdn.discordapp.com/attachments/795094889351217172/808968032998260766/unknown.png)
 
-For now it includes 3 blocks, sand, water and rocks, it is quite heavy when you got a lot of blocks(500 or more), but I will work on an way to otimize it.
+For now it includes 3 blocks, sand, water and rock.
 
 # How to run
 Download the last release, run the exe and have fun!
