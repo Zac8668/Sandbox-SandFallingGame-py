@@ -7,7 +7,7 @@ class sand:
         self.name = 'sand'
         self.density = 2
         self.SAND = pygame.Color(255,200,0)
-        self.AIR = 0
+        self.AIR = 3289650
         
     def move_down(self, pixel_array):
         try:
@@ -74,7 +74,7 @@ class sand:
         except IndexError:
             pass
     
-    def gravity(self, pixel_array):
+    def gravity(self, pixel_array, *args, **kwargs):
         check_down = self.check_down(pixel_array)
         check_down_left = self.check_down_left(pixel_array)
         check_down_right = self.check_down_right(pixel_array)
@@ -103,11 +103,12 @@ class rock:
         self.name = 'rock'
         self.density = 5
         self.ROCK = pygame.Color(80,80,80)
+        self.AIR = 3289650
         
     def move_down(self, pixel_array):
         try:
             self.pos[1] += 1
-            pixel_array[self.pos[0], self.pos[1]-1] = pygame.Color(0,0,0)
+            pixel_array[self.pos[0], self.pos[1]-1] = self.AIR
         except IndexError:
             pass
         
@@ -115,7 +116,7 @@ class rock:
         down_me = False
             #move down
         try:
-            if pixel_array[self.pos[0], (self.pos[1])+1] != 0:
+            if pixel_array[self.pos[0], (self.pos[1])+1] != self.AIR:
                 down_me = True
         except IndexError:
             down_me = True
@@ -128,7 +129,7 @@ class rock:
         except IndexError:
             pass
     
-    def gravity(self, pixel_array):
+    def gravity(self, pixel_array, *args, **kwargs):
         check_down = self.check_down(pixel_array)
         if check_down == False:
             self.move_down(pixel_array)
@@ -140,8 +141,8 @@ class water:
         self.pos = [pos[0], pos[1]]
         self.name = 'water'
         self.density = 1
-        self.WATER = pygame.Color(10,0,200)
-        self.AIR = 0
+        self.WATER = pygame.Color(0,0,200)
+        self.AIR = 3289650
         
     def move_down(self, pixel_array):
         try:
@@ -242,13 +243,23 @@ class water:
         return right_me
               
     def check_up(self, pixel_array):
-        down_me = False
+        up_me = False
             #move up
+
+        if pixel_array[self.pos[0], self.pos[1]-1] != self.AIR and pixel_array[self.pos[0], self.pos[1]-1] != 200:
+            up_me = True
+
+        return up_me
+            
+    def move_up(self, pixel_array, game_objs):
+        for obj in game_objs:
+            if obj.pos == [self.pos[0], self.pos[1]- 1]:
+                the_one = obj
         try:
-            if pixel_array[self.pos[0], (self.pos[1])-1] != self.AIR:
-                down_me = True
-        except IndexError:
-            down_me = True
+            the_one.pos[1] += 1
+            self.pos[1] -= 1
+        except UnboundLocalError:
+            pass
             
     def draw_self(self, pixel_array):
         try:
@@ -256,7 +267,7 @@ class water:
         except IndexError:
             pass
                 
-    def gravity(self, pixel_array):
+    def gravity(self, pixel_array, game_objs):
         check_down = self.check_down(pixel_array)
         check_down_left = self.check_down_left(pixel_array)
         check_down_right = self.check_down_right(pixel_array)
@@ -291,5 +302,9 @@ class water:
                 self.move_left(pixel_array)
             if n == 2:
                 self.move_right(pixel_array)
+                
+        if self.name == 'water':
+            if self.check_up(pixel_array):
+                self.move_up(pixel_array, game_objs)
         
         self.draw_self(pixel_array) 

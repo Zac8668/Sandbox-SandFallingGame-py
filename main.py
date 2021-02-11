@@ -20,7 +20,10 @@ class sandbox_py:
         
         self.SAND = pygame.Color(255,200,0)
         self.ROCK = pygame.Color(80,80,80)
-        self.AIR = 0
+        self.AIR = pygame.Color(50,50,50)
+        
+        self.pixel_array.replace((0,0,0), self.AIR)
+        self.AIR = 3289650
         
         pygame.init()
         pygame.display.set_caption('sandbox.py')
@@ -32,7 +35,7 @@ class sandbox_py:
             pygame.draw.rect(self.screen, self.SAND, self.cur_block_img)
 
         elif self.cur_block == 'rock':
-            pygame.draw.rect(self.screen, (80,80,80), self.cur_block_img)
+            pygame.draw.rect(self.screen, self.ROCK, self.cur_block_img)
 
         elif self.cur_block == 'water':
             pygame.draw.rect(self.screen, (0,0,200), self.cur_block_img)
@@ -80,7 +83,7 @@ class sandbox_py:
             #gets mouse coordinates and create block on it
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     pos = self.mouse_to_grid(event.pos)
-                    
+
                     if self.cur_block == 'sand':
                         if self.pixel_array[pos[0], pos[1]] == self.AIR:
                             new_sand_obj = sand(pos)
@@ -108,7 +111,7 @@ class sandbox_py:
         #draw, flip and limit fps of the screen
             objs = 0
             for obj in self.game_objs:
-                obj.gravity(self.pixel_array)
+                obj.gravity(self.pixel_array, self.game_objs)
                 objs += 1
         
             self.draw_all()
